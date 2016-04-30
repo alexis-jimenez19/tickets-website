@@ -1,5 +1,5 @@
 ---
-ip: "192.168.10.10"
+ip: "192.168.5.10"
 memory: 2048
 cpus: 1
 hostname: ticketsapi
@@ -12,7 +12,7 @@ keys:
     - ~/.ssh/id_rsa
 
 folders:
-    - map: "F:/Websites2016/tickets-website/ticketsAPI"
+    - map: "D:/tickets-website/ticketsAPI"
       to: "/home/vagrant/ticketsapi"
 
 sites:

@@ -4,7 +4,7 @@ use Illuminate\Database\Eloquent\Model;
 class Evento extends Model
 {
     //u stands for user
-    protected $fillable = ['nombre_e','ciudad_e','estado_e', 'pais_e','lugar_e','fecha_e','hora_e','inicio_venta','imagen_e'];
+    protected $fillable = ['nombre_e','ciudad_e','estado_e', 'pais_e','lugar_e','fecha_e','hora_e','inicio_venta','imagen_e','subcategoria_id'];
 
     protected $hidden = ['id','created_at','updated_at'];
 
