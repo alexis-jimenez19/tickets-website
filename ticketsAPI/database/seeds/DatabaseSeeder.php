@@ -2,7 +2,13 @@
 
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
-
+use App\Administrador;
+use App\Boleto;
+use App\Categoria;
+use App\Cliente;
+use App\Evento;
+use App\Rol;
+use App\Subcategoria;
 class DatabaseSeeder extends Seeder {
 
 	/**
@@ -12,9 +18,46 @@ class DatabaseSeeder extends Seeder {
 	 */
 	public function run()
 	{
-		Model::unguard();
+		DB::statement('SET FOREIGN_KEY_CHECKS = 0');
+		Administrador::truncate();
+		Evento::truncate();
+		Boleto::truncate();
+		Cliente::truncate();
+		Categoria::truncate();
+		Subcategoria::truncate();
+		Rol::truncate();
+		DB::table('boleto_cliente')->truncate();
 
-		// $this->call('UserTableSeeder');
+		DB::table('roles')->insert(['nombre_r'=>'Super']);
+		DB::table('roles')->insert(['nombre_r'=>'Profesional']);
+		DB::table('roles')->insert(['nombre_r'=>'Personal']);
+		DB::table('roles')->insert(['nombre_r'=>'Junior']);
+
+		DB::table('categorias')->insert(['nombre_c'=>'Deportes']);
+		DB::table('categorias')->insert(['nombre_c'=>'Conciertos']);
+		DB::table('categorias')->insert(['nombre_c'=>'Teatro y Culturales']);
+
+		DB::table('subcategorias')->insert(['nombre_sc'=>'Cabaret','categoria_id'=>'2']);
+		DB::table('subcategorias')->insert(['nombre_sc'=>'Instrumental/Jazz','categoria_id'=>'2']);
+		DB::table('subcategorias')->insert(['nombre_sc'=>'Pop/Romantica','categoria_id'=>'2']);
+		DB::table('subcategorias')->insert(['nombre_sc'=>'Box/Lucha Libre','categoria_id'=>'1']);
+		DB::table('subcategorias')->insert(['nombre_sc'=>'Béisbol','categoria_id'=>'1']);
+		DB::table('subcategorias')->insert(['nombre_sc'=>'Fútbol','categoria_id'=>'1']);
+		DB::table('subcategorias')->insert(['nombre_sc'=>'Tenis','categoria_id'=>'1']);
+		DB::table('subcategorias')->insert(['nombre_sc'=>'Deportes Extremos','categoria_id'=>'1']);
+		DB::table('subcategorias')->insert(['nombre_sc'=>'Ballet/Danza','categoria_id'=>'3']);
+		DB::table('subcategorias')->insert(['nombre_sc'=>'Obras de teatro','categoria_id'=>'3']);
+		DB::table('subcategorias')->insert(['nombre_sc'=>'Exhibiciones','categoria_id'=>'3']);
+		DB::table('subcategorias')->insert(['nombre_sc'=>'Voces/Coros','categoria_id'=>'3']);
+
+		factory(Administrador::class,20)->create(['rol_id'=>mt_rand(1,4)]);
+
+		factory(Evento::class,30)->create(['administrador_id'=>mt_rand(1,30),'subcategoria_id'=>mt_rand(1,12)]);
+		factory(Boleto::class,800)->create(['evento_id'=>mt_rand(1,30)]);
+		factory(Cliente::class,300)->create()->each(function($cliente){
+			$cliente->boletos()->attach(array_rand(range(1,800),4));
+		});
+		
 	}
 
 }
