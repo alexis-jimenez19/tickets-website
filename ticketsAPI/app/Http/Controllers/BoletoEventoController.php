@@ -37,9 +37,11 @@ class BoletoEventoController extends Controller
     {
         $this->validacion($request);
         $evento = Evento::find($evento_id);
-        if ($evento) {
+        if ($evento) 
+        {
             $boleto = Boleto::find($boleto_id);
-            if ($boleto) {
+            if ($boleto) 
+            {
                 $boleto->titulo = $request->get("titulo");
                 $boleto->descripcion = $request->get("descripcion");
                 $boleto->valor = $request->get("valor");

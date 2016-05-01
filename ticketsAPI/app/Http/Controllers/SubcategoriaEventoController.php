@@ -16,34 +16,39 @@ class SubcategoriaEventoController extends Controller
         }
         return $this->crearRespuestError("no se encontro esa subcategoria", 404);
     }
-    public function store(Request $request, $subcategoria_id)
+   
+    
+    public function update(Request $request, $subcategoria_id, $evento_id)
     {
-    	$subcategoria = Subcategoria::find($subcategoria_id);
+        $subcategoria = Subcategoria::find($subcategoria_id);
         if ($subcategoria) 
         {
-            $this->validacion($request);
-            $campos = $request->all();
-            $campos['subcategoria_id'] = $subcategoria_id;
-            Evento::create($campos);
-            return $this->crearRespuesta("el evento se ha creado satisfactoriamente",200);
+            $evento = Evento::find($evento_id);
+            //return $this->crearRespuestaError("$evento_id", 404);
+            if ($evento) 
+            {
+                $evento->nombre_e = $request->get("nombre_e");
+                $evento->ciudad_e = $request->get("ciudad_e");
+                $evento->estado_e = $request->get("estado_e");
+                $evento->pais_e = $request->get("pais_e");
+                $evento->lugar_e = $request->get("lugar_e");
+                $evento->fecha_e = $request->get("fecha_e");
+                $evento->hora_e = $request->get("hora_e");
+                $evento->inicio_venta = $request->get("inicio_venta");
+                $evento->imagen_e = $request->get("imagen_e");
+                $evento->subcategoria_id = $subcategoria_id;
+                $evento->save();
+                return $this->crearRespuesta("Se ha actualizado", 201);
+            }
+            return $this->crearRespuestaError("no se encontro ese vento", 404);
         }
-        return $this->crearRespuestaError("No existe un id con esa respuesta", 404);
+        return $this->crearRespuestaError("no se encontro esa subcategoria", 404);
     }
-    
-    public function update()
-    {
-    	return "saludos desde update@subcategoriaController";
-    }
+    /*
     public function destroy()
     {
     	return "saludos desde destroy@subcategoriaController";
-    }
-
-    public function validacion(Request $request)
-    {
-        $reglas = 
-        [
-            'nombre_e' => 'required',
+         'nombre_e' => 'required',
             'ciudad_e' => 'required',
             'estado_e' => 'required',
             'pais_e' => 'required',
@@ -51,9 +56,9 @@ class SubcategoriaEventoController extends Controller
             'fecha_e' => 'required',
             'hora_e' => 'required',
             'inicio_venta' => 'required',
-            'imagen_e' => 'required'
-        ];
-
-        $this->validate($request, $reglas);
+            'imagen_e' => 'required',
     }
+    */
+
+  
 }

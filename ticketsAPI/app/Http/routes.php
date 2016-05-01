@@ -107,3 +107,5 @@ $app->get('/clientes/{clientes}/boletos/{boletos}', 'BoletoClienteController@sho
 //$app->patch('/clientes/{clientes}/boletos/{boletos}', 'BoletoClienteController@update'); 
 //$app->put('/clientes/{clientes}/boletos/{boletos}', 'BoletoClienteController@update');  
 $app->delete('/clientes/{clientes}/boletos/{boletos}', 'BoletoClienteController@destroy'); //Se puede eliminar un Boleto o el paquete de boletos que un cliente en caso de estar pendientes volvemos a poner la disponibilidad de estos aumentando contador de boletos con ese id
+
+$app->post('/administradores/{administradores}/subcategorias/{subcategorias}/eventos', 'AdministradorSubcategoriaEventoController@store'); //
