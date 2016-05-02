@@ -54,11 +54,7 @@ class BoletoEventoController extends Controller
         return $this->crearRespuestaError("no existe evento con id dado",404);
     }
 
-    public function show()
-    {
-        return "Estas en show de BoletoEstudianteController";
-    }
-
+    
     public function destroy($evento_id,$boleto_id)
     {
         $evento = Evento::find($evento_id);

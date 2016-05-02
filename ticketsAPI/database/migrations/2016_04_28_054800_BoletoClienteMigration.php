@@ -12,15 +12,16 @@ class BoletoClienteMigration extends Migration
      */
     public function up()
     {
-        Schema::create('boleto_cliente', function (Blueprint $table) {
+        Schema::create('boletos_clientes', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('cliente_id')->unsigned();
             $table->foreign('cliente_id')->references('id')->on('clientes');
-            $table->integer('boleto_id')->unsigned();
-            $table->foreign('boleto_id')->references('id')->on('boletos');
+            $table->string('nombre_b');
+            $table->string('precio_b');
+            $table->integer('cantidad_b_comprados');
+            $table->string('evento_id');
             $table->string('estatus_b');
-            $table->integer('cantidad_b');
-            
+            $table->timestamps();
         });
     }
 
@@ -31,6 +32,6 @@ class BoletoClienteMigration extends Migration
      */
     public function down()
     {
-        Schema::drop('boleto_cliente');
+        Schema::drop('boletocliente');
     }
 }

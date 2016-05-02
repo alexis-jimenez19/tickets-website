@@ -26,6 +26,10 @@ class Evento extends Model
     	return $this->belongsTo('App\Subcategoria');
     }
     
+    public function boletosclientes()
+    {
+        return $this->hasMany('App\BoletoCliente');
+    }
     /*
 	public function ()
     {

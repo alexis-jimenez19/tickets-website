@@ -16,8 +16,8 @@ class BoletosMigration extends Migration
             $table->increments('id');
             $table->string('nombre_b');
             $table->integer('precio_b');
-            $table->integer('cantidad_b');
-            $table->string('numero_r');
+            $table->integer('cantidad_b_disponibles');
+            $table->string('numero_referencia');
             $table->integer('evento_id')->unsigned();
             $table->foreign('evento_id')->references('id')->on('eventos');
             $table->timestamps();

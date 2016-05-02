@@ -12,7 +12,7 @@ class Cliente extends Model
     
     public function boletos()
     {
-    	return $this->belongsToMany('App\Boleto');
+    	return $this->belongsToMany('App\BoletoCliente');
     }
     
     /*

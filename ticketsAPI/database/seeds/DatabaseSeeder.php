@@ -9,9 +9,11 @@ use App\Cliente;
 use App\Evento;
 use App\Rol;
 use App\Subcategoria;
+use App\BoletoCliente;
+
 class DatabaseSeeder extends Seeder {
 
-	/**
+	/**use 
 	 * Run the database seeds.
 	 *
 	 * @return void
@@ -26,7 +28,7 @@ class DatabaseSeeder extends Seeder {
 		Categoria::truncate();
 		Subcategoria::truncate();
 		Rol::truncate();
-		DB::table('boleto_cliente')->truncate();
+		BoletoCliente::truncate();
 
 		DB::table('roles')->insert(['nombre_r'=>'Super']);
 		DB::table('roles')->insert(['nombre_r'=>'Profesional']);
@@ -50,13 +52,13 @@ class DatabaseSeeder extends Seeder {
 		DB::table('subcategorias')->insert(['nombre_sc'=>'Exhibiciones','categoria_id'=>'3']);
 		DB::table('subcategorias')->insert(['nombre_sc'=>'Voces/Coros','categoria_id'=>'3']);
 
-		factory(Administrador::class,20)->create(['rol_id'=>mt_rand(1,4)]);
+		factory(Administrador::class,20)->create();
+		factory(Evento::class,30)->create();
+		factory(Boleto::class,100)->create();
+		factory(Cliente::class,50)->create();
+		factory(BoletoCliente::class,100)->create();
 
-		factory(Evento::class,30)->create(['administrador_id'=>mt_rand(1,30),'subcategoria_id'=>mt_rand(1,12)]);
-		factory(Boleto::class,800)->create(['evento_id'=>mt_rand(1,30)]);
-		factory(Cliente::class,300)->create()->each(function($cliente){
-			$cliente->boletos()->attach(array_rand(range(1,800),4));
-		});
+
 		
 	}
 

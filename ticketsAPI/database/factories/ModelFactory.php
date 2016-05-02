@@ -36,6 +36,7 @@ $factory->define(App\Administrador::class, function ($faker) {
         'direccion_a' => $faker->streetAddress,
         'telefono_a' => $faker->phoneNumber,
         'celular_a' => $faker->phoneNumber,
+        'rol_id' => $faker->numberBetween($min = 1, $max = 4),
     ];
 });
 
@@ -52,6 +53,8 @@ $factory->define(App\Evento::class, function ($faker) {
         'hora_e'=> $faker->time($format = 'H:i:s', $max = 'now'),
         'inicio_venta'=> $faker->date,
         'imagen_e'=> $faker->imageUrl($width = 640, $height = 480),
+        'subcategoria_id' => $faker->numberBetween($min = 1, $max = 11),
+        'administrador_id' => $faker->numberBetween($min = 1, $max = 20),
     ];
 });
 
@@ -59,8 +62,9 @@ $factory->define(App\Boleto::class, function ($faker) {
     return [
     		'nombre_b'=> $faker-> sentence($nbWords = 6, $variableNbWords = true),
             'precio_b'=> $faker->numberBetween($min = 300, $max = 9000),
-            'cantidad_b'=> $faker->numberBetween($min = 300, $max = 700),
-            'numero_r'=> $faker->creditCardNumber,
+            'cantidad_b_disponibles'=> $faker->numberBetween($min = 100, $max = 200),
+            'numero_referencia'=> $faker->creditCardNumber,
+            'evento_id' => $faker->numberBetween($min = 1, $max = 30),
     ];
 });
 
@@ -76,5 +80,15 @@ $factory->define(App\Cliente::class, function ($faker) {
             'direccion_u'=> $faker->streetAddress,
             'telefono_u'=> $faker->phoneNumber,
             'celular_u'=> $faker->phoneNumber,
+    ];
+});
+
+$factory->define(App\BoletoCliente::class, function ($faker) {
+    return [
+            'nombre_b'=> $faker-> sentence($nbWords = 6, $variableNbWords = true),
+            'precio_b'=> $faker->numberBetween($min = 300, $max = 9000),
+            'cantidad_b_comprados'=> $faker->numberBetween($min = 1, $max = 4),
+            'evento_id' => $faker->numberBetween($min = 1, $max = 30),
+            'cliente_id' => $faker->numberBetween($min = 1, $max = 50),
     ];
 });
