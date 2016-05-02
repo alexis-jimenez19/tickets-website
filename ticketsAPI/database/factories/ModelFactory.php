@@ -89,6 +89,7 @@ $factory->define(App\BoletoCliente::class, function ($faker) {
             'precio_b'=> $faker->numberBetween($min = 300, $max = 9000),
             'cantidad_b_comprados'=> $faker->numberBetween($min = 1, $max = 4),
             'evento_id' => $faker->numberBetween($min = 1, $max = 30),
-            'cliente_id' => $faker->numberBetween($min = 1, $max = 50),
+            'estatus_b' => 'Pendiente',
     ];
 });
+

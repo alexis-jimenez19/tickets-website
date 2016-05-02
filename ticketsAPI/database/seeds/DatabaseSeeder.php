@@ -56,7 +56,9 @@ class DatabaseSeeder extends Seeder {
 		factory(Evento::class,30)->create();
 		factory(Boleto::class,100)->create();
 		factory(Cliente::class,50)->create();
-		factory(BoletoCliente::class,100)->create();
+		factory(BoletoCliente::class,100)->create()->each(function($boletocliente){
+			$boletocliente->clientes()->attach(array_rand(range(1,50),4));
+		});
 
 
 		

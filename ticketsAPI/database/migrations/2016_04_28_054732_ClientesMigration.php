@@ -35,6 +35,7 @@ class ClientesMigration extends Migration
      */
     public function down()
     {
+        //Schema::drop('boleto_boletocliente');
         Schema::drop('clientes');
     }
 }

@@ -4,7 +4,7 @@ use Illuminate\Database\Eloquent\Model;
 class BoletoCliente extends Model
 {
     //u stands for user
-    protected $fillable = ['nombre_b','precio_b','cantidad_b_comprados', 'evento_id', 'cliente_id','estatus_b'];
+    protected $fillable = ['nombre_b','precio_b','cantidad_b_comprados', 'evento_id', 'estatus_b'];
 
     protected $hidden = ['id','created_at','updated_at'];
 

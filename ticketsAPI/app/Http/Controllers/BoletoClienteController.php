@@ -11,7 +11,6 @@ class BoletoClienteController extends Controller
         if ($cliente) 
         {
             $boletos = $cliente->boletos;
-            return $this->crearRespuesta($cliente,409);
             return $this->crearRespuesta($boletos, 200);
         }
         $this->crearRespuestaError("el cliente con id $cliente_id no existe", 404);

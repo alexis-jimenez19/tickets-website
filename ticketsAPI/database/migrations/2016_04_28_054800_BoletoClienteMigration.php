@@ -14,8 +14,6 @@ class BoletoClienteMigration extends Migration
     {
         Schema::create('boletos_clientes', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('cliente_id')->unsigned();
-            $table->foreign('cliente_id')->references('id')->on('clientes');
             $table->string('nombre_b');
             $table->string('precio_b');
             $table->integer('cantidad_b_comprados');
@@ -32,6 +30,6 @@ class BoletoClienteMigration extends Migration
      */
     public function down()
     {
-        Schema::drop('boletocliente');
+        Schema::drop('boletos_clientes');
     }
 }
