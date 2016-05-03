@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Intro to Angular Material</title>
+    <!-- Angular Material style sheet -->
+    <link rel="stylesheet" href="../node_modules/angular-material/angular-material.min.css">
+    <!-- Roboto style font -->
+    <link href='https://fonts.googleapis.com/css?family=Roboto:400,400italic,500' rel='stylesheet' type='text/css'>
+    <!--CSS de icons-->
+    <link rel="stylesheet" href="../node_modules/angular-material-icons/angular-material-icons.css">
+    <!-- Custom style sheet -->
+    <link rel="stylesheet" href="../css/mystyle.css">
+
+</head>
+<body ng-app="ticketsApp" layout="column">
+
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <span>Tickets-site</span>
+                <!-- fill up the space between left and right area -->
+                <span flex></span>
+                <md-button>
+                    Inicio
+                </md-button>
+            </div>
+        </md-toolbar>
+
+        <div layout="row" flex>
+            <md-sidenav md-is-locked-open="true" md-whiteframe="3">
+                <!--
+                    <form>
+                        <md-input-container>
+                            <label for="categoriaInput">Buscar (categoria):</label>
+                            <input id="categoriaInput" type="text" ng-model="data" md-autofocus>
+                        </md-input-container>
+                    </form>
+                -->
+                <md-content>
+                    <md-list ng-controller="categoriasTickets">
+                        <md-list-item>
+                            <md-button layout="row" flex>
+                                Categorias
+                                <span flex></span>
+                                <ng-md-icon icon="keyboard_arrow_down"></ng-md-icon>
+                            </md-button>
+                        </md-list-item>
+                    </md-list>
+                </md-content>
+            </md-sidenav>
+            <md-content  flex>
+                Aqui va el contenido
+            </md-content>
+        </div>
+
+    <!--JQuery-->
+    <!--<script src="../node_modules/jquery/dist/jquery.min.js"></script>-->
+    <!-- Angular Material requires Angular.js Libraries -->
+    <script src="../node_modules/angular/angular.min.js"></script>
+    <script src="../node_modules/angular-animate/angular-animate.js"></script>
+    <script src="../node_modules/angular-aria/angular-aria.min.js"></script>
+    <script src="../node_modules/angular-messages/angular-messages.min.js"></script>
+    <!-- Angular Material Library -->
+    <script src="../node_modules/angular-material/angular-material.min.js"></script>
+    <!--Angular icons library-->
+    <script src="../node_modules/angular-material-icons/angular-material-icons.min.js"></script>
+    <!--Angular Route library-->
+    <script src="../node_modules/angular-route/angular-route.min.js"></script>
+    <!--Angular App.js-->
+    <script type="text/javascript" src="../js/app.js"></script>
+    <!--Controllers-->
+    <script type="text/javascript" src="../js/controllers/sidenav.js"></script>
+    <script type="text/javascript" src="../js/controllers/categoriasTickets.js"></script>
+
+</body>
+</html>
