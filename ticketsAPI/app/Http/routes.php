@@ -88,6 +88,9 @@ $app->delete('/eventos/{eventos}/boletos/{boletos}', 'BoletoEventoController@des
 /*Clientes Boletos*/
 $app->get('/clientes/{clientes}/boletos', 'BoletoClienteController@index'); //Se visualizan todos los boletos que estan relacionados a un cliente los cuales tiene comprados aunq estos ya hayan sido pagados o esten pendientes
 $app->post('/clientes/{clientes}/boletos', 'BoletoClienteController@store'); //Se puede agregar un boleto a un cliente debemos de recordar que mande status pendiente para despues cambiarlo a pagado en caso de haber recibido correctamente el pago
+
+$app->patch('/clientes/{clientes}/boletos/{boletos}', 'BoletoClienteController@update'); 
+$app->put('/clientes/{clientes}/boletos/{boletos}', 'BoletoClienteController@update'); 
 $app->get('/clientes/{clientes}/boletos/{boletos}', 'BoletoClienteController@show'); //se visualiza algun boleto especifico comprado por un cliente
 $app->delete('/clientes/{clientes}/boletos/{boletos}', 'BoletoClienteController@destroy'); //Se puede eliminar un Boleto o el paquete de boletos que un cliente en caso de estar pendientes volvemos a poner la disponibilidad de estos aumentando contador de boletos con ese id
 

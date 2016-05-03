@@ -14,11 +14,11 @@ class BoletoClienteMigration extends Migration
     {
         Schema::create('boletos_clientes', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('nombre_b');
-            $table->string('precio_b');
             $table->integer('cantidad_b_comprados');
-            $table->string('evento_id');
             $table->string('estatus_b');
+            $table->integer('boleto_id')->unsigned();
+            $table->foreign('boleto_id')->references('id')->on('boletos');
+            //$table->foreign('categoria_id')->references('id')->on('categorias');
             $table->timestamps();
         });
     }

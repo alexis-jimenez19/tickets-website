@@ -4,7 +4,7 @@ use Illuminate\Database\Eloquent\Model;
 class BoletoCliente extends Model
 {
     //u stands for user
-    protected $fillable = ['nombre_b','precio_b','cantidad_b_comprados', 'evento_id', 'estatus_b'];
+    protected $fillable = ['cantidad_b_comprados', 'estatus_b','boleto_id'];
 
     protected $hidden = ['id','created_at','updated_at'];
 
@@ -18,6 +18,11 @@ class BoletoCliente extends Model
 	public function evento()
     {
     	return $this->belongsTo('App\Evento');
+    }
+
+    public function boletopadre()
+    {
+        return $this->belongsTo('App\Boleto');
     }
     /*
     public function ()
