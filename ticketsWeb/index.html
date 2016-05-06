@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Intro to Angular Material</title>
+    <title>TICKET</title>
     <!-- Angular Material style sheet -->
     <link rel="stylesheet" href="../node_modules/angular-material/angular-material.min.css">
     <!-- Roboto style font -->
@@ -12,9 +12,12 @@
     <link rel="stylesheet" href="../node_modules/angular-material-icons/angular-material-icons.css">
     <!-- Custom style sheet -->
     <link rel="stylesheet" href="../css/mystyle.css">
+    <link rel="icon"
+      type="image/ico"
+      href="../imgs/ticket.ico">
 
 </head>
-<body ng-app="ticketsApp" layout="column">
+<body ng-app="ticketsApp" layout="column" ng-controller="categoriasTickets">
 
         <md-toolbar>
             <div class="md-toolbar-tools">
@@ -37,20 +40,117 @@
                         </md-input-container>
                     </form>
                 -->
-                <md-content>
-                    <md-list ng-controller="categoriasTickets">
-                        <md-list-item>
-                            <md-button layout="row" flex>
-                                Categorias
-                                <span flex></span>
-                                <ng-md-icon icon="keyboard_arrow_down"></ng-md-icon>
-                            </md-button>
+                <md-content >
+                    <md-list  layout="column" flex>
+
+                        <md-list-item ng-repeat="categoria in categorias.data">
+                            <div layout="column" flex>
+                                <md-button layout="row" ng-click="obtenerSubcategorias(categoria.id)" class="md-primary md-hue-1">
+                                    {{categoria.nombre_c}}
+                                    <span flex></span>
+                                    <ng-md-icon icon="keyboard_arrow_down"></ng-md-icon>
+                                </md-button>
+                                <md-list layout="column" ng-show="categoriaSeleccionada==categoria.id">
+                                    <md-list-item  layout="row"  ng-repeat="subcategoria in subcategorias.data">
+                                        <span flex="10"></span>
+                                        <md-button ng-click="obtenerEventos(subcategoria.id)" flex style="text-align:left;">
+                                            {{subcategoria.nombre_sc}}
+                                        </md-button>
+                                    </md-list-item>
+
+                                </md-list>
+                            </div>
                         </md-list-item>
                     </md-list>
                 </md-content>
             </md-sidenav>
-            <md-content  flex>
-                Aqui va el contenido
+            <md-content  flex layout-margin layout-padding>
+                <div>
+                    <md-grid-list
+                    md-cols="1" md-cols-sm="2" md-cols-md="3" md-cols-gt-md="6"
+                    md-row-height-gt-md="1:1" md-row-height="4:3"
+                    md-gutter="8px" md-gutter-gt-sm="4px" >
+                        <md-grid-tile ng-repeat="evento in eventosObtenidos"
+                        md-rowspan="{{1}}"
+                        md-colspan="{{1}}"
+                        md-colspan-sm="1"
+                        md-colspan-xs="1"
+                        ng-click="obtenerBoletos(evento.id, evento)"
+                        >
+                            <img src="{{evento.imagen_e}}" alt="" width="100%" height="100%">
+
+                            <md-grid-tile-footer><h3>{{evento.nombre_e}}</h3></md-grid-tile-footer>
+                        </md-grid-tile>
+                    </md-grid-list>
+                </div>
+                <section layout="column" class="md-whiteframe-2dp" flex ng-show="activaronBoletos">
+                    <!--<md-toolbar md-scroll-shrink ng-if="true">
+                        <div class="md-toolbar-tools">
+                            <h1>
+                                {{eventoSeleccionado.nombre_e}}
+                            </h1>
+                    </md-toolbar>-->
+                    <!--<img src="{{eventoSeleccionado.imagen_e}}" alt="" flex>-->
+                    <md-toolbar class="md-warn">
+                        <h1>
+                            {{eventoSeleccionado.nombre_e}}
+                        </h1>
+                    </md-toolbar>
+                    <img src="{{eventoSeleccionado.imagen_e}}" alt="">
+                    <div layout="row">
+                        <span>Ciudad </span><h3>{{eventoSeleccionado.ciudad_e}}</h3>
+                    </div>
+                    <div layout="row">
+                        <span>Estado </span><h3>{{eventoSeleccionado.estado_e}}</h3>
+                    </div>
+                    <div layout="row">
+                        <span>Pais </span><h3>{{eventoSeleccionado.pais_e}}</h3>
+                    </div>
+                    <div layout="row">
+                        <span>Lugar</span><h3>{{eventoSeleccionado.lugar_e}}</h3>
+                    </div>
+                    <div layout="row">
+                        <span>Fecha</span><h3>{{eventoSeleccionado.fecha_e}}</h3>
+                    </div>
+                    <div layout="row">
+                        <span>Hora</span><h3>{{eventoSeleccionado.hora_e}}</h3>
+                    </div>
+                    <div layout="row">
+                        <span>Inicio de Venta </span><h3>{{eventoSeleccionado.inicio_venta}}</h3>
+                    </div>
+                    <!--{{eventoSeleccionado.imagen_e}}
+                    {{eventoSeleccionado.subcategoria_id}}
+                    {{eventoSeleccionado.administrador_id}}-->
+
+                    <h3>Boletos</h3>
+                    <md-card ng-repeat="boleto in boletosObtenidos">
+                        <md-button class="md-fab md-mini md-primary md-hue-2" aria-label="Profile">
+                            {{$index+1}}
+                        </md-button>
+                        <md-card-title>
+
+                            <md-card-title-text>
+                                <span class="md-headline">{{boleto.nombre_b}}</span>
+                            </md-card-title-text>
+                        </md-card-title>
+                        <md-card-content>
+                            <p>
+                                Precio:{{boleto.precio_b}}<br>
+                                Disponibles:{{boleto.cantidad_b_disponibles}}
+                            </p>
+                        </md-card-content>
+                        <md-card-actions layout="row" layout-align="end center">
+                            <md-button class="md-icon-button" aria-label="Share">
+                                <ng-md-icon icon="share"></ng-md-icon>
+                            </md-button>
+
+                            <md-button class="md-icon-button" aria-label="Buy it">
+                                <ng-md-icon icon="attach_money"></ng-md-icon>
+                            </md-button>
+                        </md-card-actions>
+                    </md-card>
+
+                </section>
             </md-content>
         </div>
 
@@ -72,6 +172,9 @@
     <!--Controllers-->
     <script type="text/javascript" src="../js/controllers/sidenav.js"></script>
     <script type="text/javascript" src="../js/controllers/categoriasTickets.js"></script>
+
+<style>
+
 
 </body>
 </html>

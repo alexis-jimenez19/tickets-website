@@ -62,6 +62,10 @@ $app->singleton(
 //     // Illuminate\View\Middleware\ShareErrorsFromSession::class,
 //     // Laravel\Lumen\Http\Middleware\VerifyCsrfToken::class,
 // ]);
+/*$app->middleware([
+    Barryvdh\Cors\HandleCors::class
+]);*/
+
 
 // $app->routeMiddleware([
 
@@ -78,9 +82,10 @@ $app->singleton(
 |
 */
 
-// $app->register(App\Providers\AppServiceProvider::class);
+ //$app->register(App\Providers\AppServiceProvider::class);
 // $app->register(App\Providers\EventServiceProvider::class);
-
+$app->register(Barryvdh\Cors\LumenServiceProvider::class);
+$app->configure('cors');
 /*
 |--------------------------------------------------------------------------
 | Load The Application Routes
@@ -95,5 +100,6 @@ $app->singleton(
 $app->group(['namespace' => 'App\Http\Controllers'], function ($app) {
 	require __DIR__.'/../app/Http/routes.php';
 });
+
 
 return $app;

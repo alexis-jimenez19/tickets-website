@@ -4,9 +4,9 @@ use Illuminate\Database\Eloquent\Model;
 class Subcategoria extends Model
 {
     //u stands for user
-    protected $fillable = ['nombre_sc','categoria_id'];
+    protected $fillable = ['id','nombre_sc','categoria_id'];
 
-    protected $hidden = ['id','created_at','updated_at'];
+    protected $hidden = ['created_at','updated_at'];
 
     protected $table = 'subcategorias';
 

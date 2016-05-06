@@ -4,9 +4,9 @@ use Illuminate\Database\Eloquent\Model;
 class Categoria extends Model
 {
     //u stands for user
-    protected $fillable = ['nombre_c'];
+    protected $fillable = ['id','nombre_c'];
 
-    protected $hidden = ['id','created_at','updated_at'];
+    protected $hidden = ['created_at','updated_at'];
 
     protected $table = 'categorias';
 
